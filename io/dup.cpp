@@ -1,0 +1,28 @@
+#include <iostream>
+#include<unistd.h>
+
+using namespace std;
+
+int main(int argc,char **argv)
+{
+    int cfd1,cfd2;
+    char str1[]="hi~ \n";
+    char str2[]="nice day ~\n";
+
+    cfd1 = dup(cfd1);
+    cfd2=dup2(cfd1,7);
+
+    cout<<"fd1 = "<<cfd1<<" fd2 = "<<cfd2<<endl;
+    write(cfd1,str1,sizeof(str1));
+    write(cfd2,str2,sizeof(str2));
+
+    close(cfd1);
+    close(cfd2);
+    write(1,str1,sizeof(str1));
+    close(1);
+    write(1,str2,sizeof(str2));
+    
+
+
+    return 0;
+}
